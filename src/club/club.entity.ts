@@ -20,7 +20,7 @@ export class ClubEntity {
   name: string;
 
   @Column()
-  foundationDate: Date;
+  foundation: Date;
 
   @Column()
   image: string;
