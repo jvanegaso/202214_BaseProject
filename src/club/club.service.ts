@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { msgs } from 'src/shared/constants/constants';
 import {
   BusinessError,
   BusinessLogicException,
@@ -15,10 +16,6 @@ import { ClubEntity } from './club.entity';
 // valide que la descripción no supere el máximo de caracteres permitidos.
 
 const relations = ['partners'];
-const msgs = {
-  CLUB_NOT_FOUND: 'The club with the given id was not found',
-  DESCRIPTION_ERROR: 'The description must be shorten than 100 characters',
-};
 const DESCRIPTION_MAX_LENGTH = 100;
 
 @Injectable()

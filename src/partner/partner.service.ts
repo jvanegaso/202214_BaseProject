@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { msgs } from 'src/shared/constants/constants';
 import {
   BusinessError,
   BusinessLogicException,
@@ -15,10 +16,6 @@ import { PartnerEntity } from './partner.entity';
 // es decir que tenga el caracter ‘@’.
 
 const relations = ['clubs'];
-const msgs = {
-  PARTNER_NOT_FOUND: 'The partner with the given id was not found',
-  EMAIL_ERROR: 'The email address is invalid',
-};
 
 @Injectable()
 export class PartnerService {
