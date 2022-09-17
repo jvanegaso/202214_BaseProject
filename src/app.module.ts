@@ -7,7 +7,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PartnerEntity } from './partner/partner.entity';
 import { ClubEntity } from './club/club.entity';
 import { ClubPartnerModule } from './club-partner/club-partner.module';
-import { PartnersController } from './partners/partners.controller';
 
 @Module({
   imports: [
@@ -27,7 +26,7 @@ import { PartnersController } from './partners/partners.controller';
     }),
     ClubPartnerModule,
   ],
-  controllers: [AppController, PartnersController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
