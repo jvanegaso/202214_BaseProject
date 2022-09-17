@@ -7,13 +7,13 @@ export class ClubDTO {
 
   @IsString()
   @IsNotEmpty()
-  readonly foundation: Date;
+  readonly foundation: string;
 
   @IsString()
   @IsNotEmpty()
   readonly image: string;
 
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
   readonly description: string;
 }

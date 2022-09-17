@@ -1,5 +1,11 @@
 import { ClubEntity } from '../club/club.entity';
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 // Cree la entidad Socio en el módulo correspondiente.
 // Un socio tiene un nombre de usuario,
@@ -17,7 +23,7 @@ export class PartnerEntity {
   email: string;
 
   @Column()
-  birthdate: Date;
+  birthday: string;
 
   @ManyToMany(() => ClubEntity, (club) => club.partners)
   clubs: ClubEntity[];

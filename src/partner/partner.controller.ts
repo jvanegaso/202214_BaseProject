@@ -36,6 +36,7 @@ export class PartnerController {
   }
 
   @Post()
+  @HttpCode(201)
   async create(@Body() partnerDTO: PartnerDTO) {
     const partner: PartnerEntity = plainToInstance(PartnerEntity, partnerDTO);
     return await this.partnerService.create(partner);

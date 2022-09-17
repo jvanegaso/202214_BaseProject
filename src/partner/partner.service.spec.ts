@@ -48,7 +48,7 @@ describe('PartnerService', () => {
     const partner: PartnerEntity = await service.findOne(storedPartner.id);
     expect(partner).not.toBeNull();
     expect(partner.name).toEqual(storedPartner.name);
-    expect(partner.birthdate).toEqual(storedPartner.birthdate);
+    expect(partner.birthday).toEqual(storedPartner.birthday);
     expect(partner.email).toEqual(storedPartner.email);
   });
 
@@ -69,7 +69,7 @@ describe('PartnerService', () => {
     });
     expect(storedPartner).not.toBeNull();
     expect(storedPartner.name).toEqual(newPartner.name);
-    expect(storedPartner.birthdate).toEqual(newPartner.birthdate);
+    expect(storedPartner.birthday).toEqual(newPartner.birthday);
     expect(storedPartner.email).toEqual(newPartner.email);
   });
 
@@ -94,7 +94,7 @@ describe('PartnerService', () => {
     });
     expect(storedPartner).not.toBeNull();
     expect(storedPartner.name).toEqual(updatedPartner.name);
-    expect(storedPartner.birthdate).toEqual(updatedPartner.birthdate);
+    expect(storedPartner.birthday).toEqual(updatedPartner.birthday);
     expect(storedPartner.email).toEqual(updatedPartner.email);
   });
 

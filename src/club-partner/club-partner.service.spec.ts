@@ -64,7 +64,7 @@ describe('ClubPartnerService', () => {
     expect(result.partners.length).toBe(1);
     expect(result.partners[0]).not.toBeNull();
     expect(result.partners[0].name).toBe(partner.name);
-    expect(result.partners[0].birthdate).toEqual(partner.birthdate);
+    expect(result.partners[0].birthday).toEqual(partner.birthday);
     expect(result.partners[0].email).toBe(partner.email);
   });
 
@@ -115,7 +115,7 @@ describe('ClubPartnerService', () => {
     expect(storedPartner).not.toBeNull();
     expect(storedPartner.name).toBe(partner.name);
     expect(storedPartner.email).toBe(partner.email);
-    expect(storedPartner.birthdate).toEqual(partner.birthdate);
+    expect(storedPartner.birthday).toEqual(partner.birthday);
   });
 
   it('findMemberFromClub should throw an exception for an invalid partner', async () => {
@@ -158,7 +158,7 @@ describe('ClubPartnerService', () => {
     expect(updatedClub.partners.length).toBe(1);
 
     expect(updatedClub.partners[0].name).toBe(partner.name);
-    expect(updatedClub.partners[0].birthdate).toEqual(partner.birthdate);
+    expect(updatedClub.partners[0].birthday).toEqual(partner.birthday);
     expect(updatedClub.partners[0].email).toBe(partner.email);
   });
 

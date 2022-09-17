@@ -7,8 +7,10 @@ import {
   Param,
   Post,
   Put,
+  UseInterceptors,
 } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
+import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors.interceptor';
 import { ClubDTO } from './club.dto';
 import { ClubEntity } from './club.entity';
 import { ClubService } from './club.service';
@@ -19,6 +21,7 @@ import { ClubService } from './club.service';
 // con sus respectivas anotaciones.
 
 @Controller('clubs')
+@UseInterceptors(BusinessErrorsInterceptor)
 export class ClubController {
   constructor(private readonly clubService: ClubService) {}
 
@@ -33,6 +36,7 @@ export class ClubController {
   }
 
   @Post()
+  @HttpCode(201)
   async create(@Body() clubDTO: ClubDTO) {
     const club: ClubEntity = plainToInstance(ClubEntity, clubDTO);
     return await this.clubService.create(club);

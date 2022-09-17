@@ -6,7 +6,7 @@ export class PartnerDTO {
 
   @IsString()
   @IsNotEmpty()
-  readonly birthday: Date;
+  readonly birthday: string;
 
   @IsString()
   @IsNotEmpty()

@@ -5,7 +5,7 @@ import { faker } from '@faker-js/faker';
 import { Repository } from 'typeorm';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { mockClub } from 'src/shared/testing-utils/mockers';
+import { mockClub } from '../shared/testing-utils/mockers';
 
 describe('ClubService', () => {
   let service: ClubService;

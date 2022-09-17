@@ -23,6 +23,8 @@ export class BusinessErrorsInterceptor implements NestInterceptor {
           );
         else if (error.type === BusinessError.BAD_REQUEST)
           throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        else if (error.type === BusinessError.INVALID_DATA)
+          throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
         else throw error;
       }),
     );

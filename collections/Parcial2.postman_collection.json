@@ -1,0 +1,1942 @@
+{
+	"info": {
+		"_postman_id": "d4fa19e8-5000-42cf-8f97-9bad08112f1f",
+		"name": "Parcial2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17377770"
+	},
+	"item": [
+		{
+			"name": "Clubs",
+			"item": [
+				{
+					"name": "Crear un Club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.collectionVariables.set(\"clubId\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Club Name 1\",\n    \"foundation\": \"01-01-1980\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/000000\",\n    \"description\": \"Lorem ipsum dolor sit amet.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Crear un Club",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Club Name 1\",\n    \"foundation\": \"01-01-1980\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/000000\",\n    \"description\": \"Lorem ipsum dolor sit amet.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1\n/clubs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1\n",
+										"clubs"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"name\": \"Club Name 1\",\n    \"foundation\": \"01-01-1980\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/000000\",\n    \"description\": \"Lorem ipsum dolor sit amet.\",\n    \"id\": \"2c36f172-62cb-4991-84b2-48ae55768e5f\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Crear un club inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"   pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The description must be shorten than 100 characters\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Club Name 1\",\n    \"foundation\": \"01/01/1980\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/000000\",\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Crear un club inválido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Club Name 1\",\n    \"foundation\": \"01/01/1980\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/000000\",\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1\n/clubs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1\n",
+										"clubs"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 400,\n    \"message\": \"The description must be shorten than 100 characters\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Obtener todos los clubs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Number of clubs > ' + 0, function () {",
+									"   var data = pm.response.json()",
+									"   pm.expect(data.length).to.greaterThan(0)",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Obtener todos los clubs",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"2c36f172-62cb-4991-84b2-48ae55768e5f\",\n        \"name\": \"Club Name 1\",\n        \"foundation\": \"01-01-1980\",\n        \"image\": \"http://dummyimage.com/157x100.png/dddddd/000000\",\n        \"description\": \"Lorem ipsum dolor sit amet.\",\n        \"partners\": []\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Obtener un club por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Obtener todos los clubs",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"2c36f172-62cb-4991-84b2-48ae55768e5f\",\n    \"name\": \"Club Name 1\",\n    \"foundation\": \"01-01-1980\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/000000\",\n    \"description\": \"Lorem ipsum dolor sit amet.\",\n    \"partners\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Obtener un club por un ID que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The club with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubIdInvalido}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubIdInvalido}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Obtener un club por un ID que no existe",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubIdInvalido}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubIdInvalido}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The club with the given id was not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"New Club Name 1\",\n    \"foundation\": \"01-01-1988\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/ffffff\",\n    \"description\": \"Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Actualizar un club",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"New Club Name 1\",\n    \"foundation\": \"01-01-1988\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/ffffff\",\n    \"description\": \"Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"2c36f172-62cb-4991-84b2-48ae55768e5f\",\n    \"name\": \"New Club Name 1\",\n    \"foundation\": \"01-01-1988\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/ffffff\",\n    \"description\": \"Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar un club con un ID que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The club with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"New Club Name 1\",\n    \"foundation\": \"01-01-1988\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/ffffff\",\n    \"description\": \"Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubIdInvalido}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubIdInvalido}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Actualizar un club con un ID que no existe",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"New Club Name 1\",\n    \"foundation\": \"01-01-1988\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/ffffff\",\n    \"description\": \"Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubIdInvalido}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubIdInvalido}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The club with the given id was not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Eliminar un club por su ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"   pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Actualizar un club",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubId}}"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Eliminar un club con un ID que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The club with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubIdInvalido}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubIdInvalido}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Eliminar un club con un ID que no existe",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1\n/clubs/00000000-0000-0000-0000-000000000000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1\n",
+										"clubs",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The club with the given id was not found\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Socios",
+			"item": [
+				{
+					"name": "Crear un socio válido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.collectionVariables.set(\"memberId\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Peter Parker\",\n    \"birthday\": \"01-01-1980\",\n    \"email\": \"imnotspiderman@avengers.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Crear un socio válido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Peter Parker\",\n    \"birthday\": \"01-01-1980\",\n    \"email\": \"imnotspiderman@avengers.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1\n/members",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1\n",
+										"members"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\n    \"name\": \"Peter Parker\",\n    \"birthday\": \"01-01-1980\",\n    \"email\": \"imnotspiderman@avengers.com\",\n    \"id\": \"805a645f-36fd-4b8e-a6a7-e1c9a2eb4492\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Crear un socio no válido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"   pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The email address is invalid\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Peter Parker\",\n    \"birthday\": \"01-01-1980\",\n    \"email\": \"imnotspiderman-avengers.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Crear un socio no válido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Peter Parker\",\n    \"birthday\": \"01-01-1980\",\n    \"email\": \"imnotspiderman-avengers.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1\n/members",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1\n",
+										"members"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\n    \"statusCode\": 400,\n    \"message\": \"The email address is invalid\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Obtener todos los socios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Number of clubs > ' + 0, function () {",
+									"   var data = pm.response.json()",
+									"   pm.expect(data.length).to.greaterThan(0)",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Obtener todos los socios",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1\n/clubs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1\n",
+										"clubs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"23d1e2ed-85cb-4fd2-a21d-73e5f8776db4\",\n        \"name\": \"Peter Parker\",\n        \"email\": \"imnotspiderman@avengers.com\",\n        \"birthday\": \"01-01-1980\",\n        \"clubs\": []\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Obtener un socio por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/members/{{memberId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members",
+								"{{memberId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Obtener un socio por ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1\n/members/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1\n",
+										"members",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"23d1e2ed-85cb-4fd2-a21d-73e5f8776db4\",\n    \"name\": \"Peter Parker\",\n    \"email\": \"imnotspiderman@avengers.com\",\n    \"birthday\": \"01-01-1980\",\n    \"clubs\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Obtener un socio por un ID que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The member with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/members/{{memberIdInvalido}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members",
+								"{{memberIdInvalido}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Obtener un socio por un ID que no existe",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/members/{{memberIdInvalido}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"members",
+										"{{memberIdInvalido}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The member with the given id was not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar un socio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Milles Morales\",\n    \"birthday\": \"01-01-1995\",\n    \"email\": \"iamthespiderman@avengers.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members/{{memberId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members",
+								"{{memberId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Actualizar un socio",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Milles Morales\",\n    \"birthday\": \"01-01-1995\",\n    \"email\": \"iamthespiderman@avengers.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/members/{{memberId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"members",
+										"{{memberId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"23d1e2ed-85cb-4fd2-a21d-73e5f8776db4\",\n    \"name\": \"Milles Morales\",\n    \"email\": \"iamthespiderman@avengers.com\",\n    \"birthday\": \"01-01-1995\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar un socio con un ID que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The member with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Milles Morales\",\n    \"birthday\": \"01-01-1995\",\n    \"email\": \"iamthespiderman@avengers.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members/{{memberIdInvalido}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members",
+								"{{memberIdInvalido}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Actualizar un socio con un ID que no existe",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Milles Morales\",\n    \"birthday\": \"01-01-1995\",\n    \"email\": \"iamthespiderman@avengers.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/members/{{memberIdInvalido}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"members",
+										"{{memberIdInvalido}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The member with the given id was not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Eliminar un socio por su ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"   pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members/{{memberId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members",
+								"{{memberId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Eliminar un socio por su ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/members/{{memberId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"members",
+										"{{memberId}}"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Eliminar un socio con un ID que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The member with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members/{{memberIdInvalido}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members",
+								"{{memberIdInvalido}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Eliminar un socio con un ID que no existe",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/members/{{memberIdInvalido}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"members",
+										"{{memberIdInvalido}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The member with the given id was not found\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Club-Socios",
+			"item": [
+				{
+					"name": "Agregar un socio a un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{memberId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{memberId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Agregar un socio a un club",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{memberId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubId}}",
+										"members",
+										"{{memberId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"e544bf42-821f-4b81-98ce-652a305ad9ca\",\n    \"name\": \"Club Name 1\",\n    \"foundation\": \"01-01-1980\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/000000\",\n    \"description\": \"Lorem ipsum dolor sit amet.\",\n    \"partners\": [\n        {\n            \"id\": \"2802d374-abcb-4870-8224-38f34ff4b4a6\",\n            \"name\": \"Peter Parker\",\n            \"email\": \"imnotspiderman@avengers.com\",\n            \"birthday\": \"01-01-1980\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Asociar un socio que no existe a un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The member with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{memberIdInvalido}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{memberIdInvalido}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Asociar un socio que no existe a un club",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{memberIdInvalido}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubId}}",
+										"members",
+										"{{memberIdInvalido}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The member with the given id was not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Obtener todos los socios de un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Number of clubs > ' + 0, function () {",
+									"   var data = pm.response.json()",
+									"   pm.expect(data.length).to.greaterThan(0)",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Obtener todos los socios de un club",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubId}}/members",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubId}}",
+										"members"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"2802d374-abcb-4870-8224-38f34ff4b4a6\",\n        \"name\": \"Peter Parker\",\n        \"email\": \"imnotspiderman@avengers.com\",\n        \"birthday\": \"01-01-1980\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Obtener un socio que pertenece a un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{memberId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{memberId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Obtener un socio que pertenece a un club",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{memberId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubId}}",
+										"members",
+										"{{memberId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"2802d374-abcb-4870-8224-38f34ff4b4a6\",\n    \"name\": \"Peter Parker\",\n    \"email\": \"imnotspiderman@avengers.com\",\n    \"birthday\": \"01-01-1980\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Obtener un socio que no es parte un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The member with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{memberIdInvalido}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{memberIdInvalido}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Obtener un socio que no es parte un club",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{memberIdInvalido}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubId}}",
+										"members",
+										"{{memberIdInvalido}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The member with the given id was not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar los socios que pertenecen a un club.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\"id\": \"0a6fb533-90c1-4122-a394-8ba25f5c9cd5\"},\n    {\"id\": \"0ddc27c5-a01e-4a4d-8e8e-a79177fae1c7\"}\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Actualizar los socios que pertenecen a un club.",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\"id\": \"0a6fb533-90c1-4122-a394-8ba25f5c9cd5\"}\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubId}}/members",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubId}}",
+										"members"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"e544bf42-821f-4b81-98ce-652a305ad9ca\",\n    \"name\": \"Club Name 1\",\n    \"foundation\": \"01-01-1980\",\n    \"image\": \"http://dummyimage.com/157x100.png/dddddd/000000\",\n    \"description\": \"Lorem ipsum dolor sit amet.\",\n    \"partners\": [\n        {\n            \"id\": \"0a6fb533-90c1-4122-a394-8ba25f5c9cd5\"\n        },\n        {\n            \"id\": \"0ddc27c5-a01e-4a4d-8e8e-a79177fae1c7\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar los socios de un club, con un socio inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The member with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\"id\": \"00000000-0000-0000-0000-000000000000\" }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Actualizar los socios de un club, con un socio inexistente",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\"id\": \"00000000-0000-0000-0000-000000000000\" }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubId}}/members",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubId}}",
+										"members"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The member with the given id was not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Eliminar un socio que es parte de un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"   pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{memberId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{memberId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Eliminar un socio que es parte de un club",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{memberId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubId}}",
+										"members",
+										"{{memberId}}"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Eliminar un socio que no es parte de un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The member with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{memberIdInvalido}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{memberIdInvalido}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Eliminar un socio que no es parte de un club",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{memberIdInvalido}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										"{{clubId}}",
+										"members",
+										"{{memberIdInvalido}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The member with the given id was not found\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1\n",
+			"type": "string"
+		},
+		{
+			"key": "clubId",
+			"value": "2c36f172-62cb-4991-84b2-48ae55768e5f"
+		},
+		{
+			"key": "clubIdInvalido",
+			"value": "00000000-0000-0000-0000-000000000000"
+		},
+		{
+			"key": "memberId",
+			"value": ""
+		},
+		{
+			"key": "memberIdInvalido",
+			"value": "00000000-0000-0000-0000-000000000000"
+		}
+	]
+}
