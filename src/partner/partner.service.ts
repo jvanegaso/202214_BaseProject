@@ -16,7 +16,7 @@ import { PartnerEntity } from './partner.entity';
 
 const relations = ['clubs'];
 const msgs = {
-  PARTNER_NOT_EXIST: 'The partner with the given id was not found',
+  PARTNER_NOT_FOUND: 'The partner with the given id was not found',
   EMAIL_ERROR: 'The email address is invalid',
 };
 
@@ -38,7 +38,7 @@ export class PartnerService {
     });
     if (!partner)
       throw new BusinessLogicException(
-        msgs.PARTNER_NOT_EXIST,
+        msgs.PARTNER_NOT_FOUND,
         BusinessError.NOT_FOUND,
       );
 
@@ -67,7 +67,7 @@ export class PartnerService {
       await this.partnerRepository.findOne({ where: { id } });
     if (!persistedPartner)
       throw new BusinessLogicException(
-        msgs.PARTNER_NOT_EXIST,
+        msgs.PARTNER_NOT_FOUND,
         BusinessError.NOT_FOUND,
       );
 
@@ -83,7 +83,7 @@ export class PartnerService {
     });
     if (!partner)
       throw new BusinessLogicException(
-        msgs.PARTNER_NOT_EXIST,
+        msgs.PARTNER_NOT_FOUND,
         BusinessError.NOT_FOUND,
       );
 
