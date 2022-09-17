@@ -5,16 +5,7 @@ import { faker } from '@faker-js/faker';
 import { Repository } from 'typeorm';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { getRepositoryToken } from '@nestjs/typeorm';
-
-const mockClub = () => {
-  const mockedClub: ClubEntity = new ClubEntity();
-  mockedClub.name = faker.company.name();
-  mockedClub.description = faker.lorem.text().substring(0, 99);
-  mockedClub.foundation = faker.date.past();
-  mockedClub.image = faker.internet.avatar();
-  mockedClub.partners = [];
-  return mockedClub;
-};
+import { mockClub } from 'src/shared/testing-utils/mockers';
 
 describe('ClubService', () => {
   let service: ClubService;

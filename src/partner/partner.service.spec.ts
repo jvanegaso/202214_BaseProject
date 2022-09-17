@@ -4,16 +4,7 @@ import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-co
 import { Repository } from 'typeorm';
 import { PartnerEntity } from './partner.entity';
 import { PartnerService } from './partner.service';
-import { faker } from '@faker-js/faker';
-
-const mockPartner = () => {
-  const mockedPartner: PartnerEntity = new PartnerEntity();
-  mockedPartner.name = faker.name.fullName();
-  mockedPartner.email = faker.internet.email();
-  mockedPartner.birthdate = faker.date.birthdate();
-  mockedPartner.clubs = [];
-  return mockedPartner;
-};
+import { mockPartner } from '../shared/testing-utils/mockers';
 
 describe('PartnerService', () => {
   let service: PartnerService;

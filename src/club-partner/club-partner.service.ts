@@ -73,6 +73,7 @@ export class ClubPartnerService {
   ): Promise<PartnerEntity> {
     const partner: PartnerEntity = await this.partnerRepository.findOne({
       where: { id: partnerId },
+      relations: ['clubs'],
     });
     if (!partner)
       throw new BusinessLogicException(
@@ -91,7 +92,7 @@ export class ClubPartnerService {
       );
 
     const clubMember: PartnerEntity = club.partners.find(
-      (c) => c.id === club.id,
+      (p) => p.id === partnerId,
     );
 
     if (!clubMember)
