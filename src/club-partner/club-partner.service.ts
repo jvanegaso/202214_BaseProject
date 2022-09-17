@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ClubEntity } from 'src/club/club.entity';
-import { PartnerEntity } from 'src/partner/partner.entity';
-import { msgs } from 'src/shared/constants/constants';
+import { ClubEntity } from '../club/club.entity';
+import { PartnerEntity } from '../partner/partner.entity';
+import { msgs } from '../shared/constants/constants';
 import {
   BusinessError,
   BusinessLogicException,
-} from 'src/shared/errors/business-errors';
+} from '../shared/errors/business-errors';
 import { Repository } from 'typeorm';
 
 // Defina la lógica de la asociación, esta debe incluir 5 métodos con las siguientes acciones:

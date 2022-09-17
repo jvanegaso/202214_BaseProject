@@ -1,4 +1,4 @@
-import { PartnerEntity } from 'src/partner/partner.entity';
+import { PartnerEntity } from '../partner/partner.entity';
 import {
   Column,
   Entity,

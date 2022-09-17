@@ -1,4 +1,4 @@
-import { ClubEntity } from 'src/club/club.entity';
+import { ClubEntity } from '../club/club.entity';
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 // Cree la entidad Socio en el módulo correspondiente.

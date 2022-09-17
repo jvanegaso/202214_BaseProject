@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { msgs } from 'src/shared/constants/constants';
+import { msgs } from '../shared/constants/constants';
 import {
   BusinessError,
   BusinessLogicException,
-} from 'src/shared/errors/business-errors';
-import { hasValidLength } from 'src/shared/util/validators';
+} from '../shared/errors/business-errors';
+import { hasValidLength } from '../shared/util/validators';
 import { Repository } from 'typeorm';
 import { ClubEntity } from './club.entity';
 

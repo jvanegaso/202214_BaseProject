@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { msgs } from 'src/shared/constants/constants';
+import { msgs } from '../shared/constants/constants';
 import {
   BusinessError,
   BusinessLogicException,
-} from 'src/shared/errors/business-errors';
-import { validateEmail } from 'src/shared/util/validators';
+} from '../shared/errors/business-errors';
+import { validateEmail } from '../shared/util/validators';
 import { Repository } from 'typeorm';
 import { PartnerEntity } from './partner.entity';
 
