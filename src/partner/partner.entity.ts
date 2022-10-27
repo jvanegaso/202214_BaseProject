@@ -10,7 +10,6 @@ import {
 // Cree la entidad Socio en el módulo correspondiente.
 // Un socio tiene un nombre de usuario,
 // un correo electrónico y una fecha de nacimiento.
-
 @Entity()
 export class PartnerEntity {
   @PrimaryGeneratedColumn('uuid')
