@@ -18,7 +18,8 @@ jobs:
         with:
           node-version: 16
       - run: npm ci
-      - run: npm test
+      - name: Test and coverage
+        run: npm run jest --coverage
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
