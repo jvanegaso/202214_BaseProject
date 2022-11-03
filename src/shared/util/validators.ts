@@ -15,3 +15,8 @@ export const hasValidLength = (value, maxLength) => {
   }
   return value.length <= maxLength;
 };
+
+export const startsWith = (search, rawPos) => {
+  const pos = rawPos > 0 ? rawPos|0 : 0;
+  return this.substring(pos, pos + search.length) === search;
+};
