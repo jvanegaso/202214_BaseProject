@@ -57,8 +57,3 @@ export const startsWith3 = (search, rawPos) => {
   const pos = rawPos > 0 ? rawPos|0 : 0;
   return this.substring(pos, pos + search.length) === search;
 };
-
-export const startsWith4 = (search, rawPos) => {
-  const pos = rawPos > 0 ? rawPos|0 : 0;
-  return this.substring(pos, pos + search.length) === search;
-};
