@@ -113,7 +113,6 @@ export const findIndex = (arr, func) => {
       return index;
     }
   }
-
   return undefined;
 };
 
@@ -123,7 +122,6 @@ export const findIndex = (arr, func) => {
       return index;
     }
   }
-
   return undefined;
 };
 
