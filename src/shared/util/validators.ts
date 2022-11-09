@@ -42,10 +42,6 @@ export const camelToSnakeCase = (text) => {
   return text.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 };
 
-export const isDateValid => (date) {
-    return !Number.isNaN(date.getTime());
-};
-
 export const findIndex = (arr, func) => {
   for (let index = 0; index < arr.length; index++) {
     if (func.call(this, arr[index], index)) {
