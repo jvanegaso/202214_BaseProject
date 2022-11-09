@@ -74,7 +74,7 @@ export const mockExceptionFunction = () => {
   }
 };
 
-export const mockExceptionFunction = () => {
+export const mockExceptionFunction2 = () => {
   const nullArray = null
   for (let i = 0; i < nullArray.lenght; i++) {
     console.log('Array en ' +  i + ' es: ' + nullArray[i]);
