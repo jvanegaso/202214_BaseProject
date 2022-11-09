@@ -128,3 +128,7 @@ export const findIndex = (arr, func) => {
 export const dummyFunction = () => {}
 
 export function dummyFunction() {}
+
+export const sayHellow = () => {
+  return 'Hellow';
+}
