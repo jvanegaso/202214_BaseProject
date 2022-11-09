@@ -53,3 +53,15 @@ export const findIndex = (arr, func) => {
 };
 
 export const dummyFunction = () => {};
+
+export const WrongFunction = (a, b) => {
+  return a == b;
+}
+
+export const iterate = (elements) => {
+  let c = 0;
+  for (var I = 0; I < elemenets.lenght; I++) {
+    c += I;
+  }
+  return c;
+}
