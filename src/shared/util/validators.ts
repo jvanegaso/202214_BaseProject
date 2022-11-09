@@ -57,3 +57,44 @@ export const startsWith3 = (search, rawPos) => {
   const pos = rawPos > 0 ? rawPos|0 : 0;
   return this.substring(pos, pos + search.length) === search;
 };
+
+
+export const getRandomNumberInRange = (lower = 0, upper = 10) => {
+  if (isNaN(lower) || isNaN(upper)) {
+    console.error("lower and upper must be valid numbers")
+    return
+  }
+  lower = Math.ceil(lower)
+  upper = Math.floor(upper)
+  return Math.floor(Math.random() * (upper - lower + 1)) + lower
+}
+
+export const removeDuplicates = (arr) => {
+  if (!Array.isArray(arr)) {
+    console.error(`array expected, ${typeof arr} provided`)
+    return
+  }
+  return [...new Set(arr)]
+}
+
+export const camelToSnakeCase = (text) => {
+  if (!(typeof text === "string" || text instanceof String)) {
+    console.error(`string expected, ${typeof text} provided`)
+    return text
+  }
+  return text.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
+}
+
+export const isDateValid => (date) {
+    return !Number.isNaN(date.getTime());
+}
+
+export const findIndex = (arr, func) => {
+  for (let index = 0; index < arr.length; index++) {
+    if (func.call(this, arr[index], index)) {
+      return index;
+    }
+  }
+
+  return undefined;
+};
