@@ -73,3 +73,29 @@ export const mockExceptionFunction = () => {
     console.log('Array en ' +  i + ' es: ' + nullArray[i]);
   }
 };
+
+
+export const promiseBugFunction = () => {
+  
+  const runPromise => () {
+    return Promise.reject("rejection reason");
+  }
+  
+  try { // Noncompliant, the catch clause of the 'try' will not be executed for the code inside promise
+    runPromise();
+  } catch (e) {
+    console.log("Failed to run promise", e);
+  }
+  
+};
+
+export const falsyValidator = () => {
+  var a = NaN;
+
+  if (a === NaN) {  // Noncompliant; always false
+    console.log("a is not a number");  // this is dead code
+  }
+  if (a !== NaN) { // Noncompliant; always true
+    console.log("a is not NaN"); // this statement is not necessarily true
+  }
+};
