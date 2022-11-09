@@ -117,3 +117,13 @@ export const findIndex = (arr, func) => {
   return undefined;
 };
 
+export const findIndex = (arr, func) => {
+  for (let index = 0; index < arr.length; index++) {
+    if (func.call(this, arr[index], index)) {
+      return index;
+    }
+  }
+
+  return undefined;
+};
+
