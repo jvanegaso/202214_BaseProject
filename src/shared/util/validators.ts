@@ -77,7 +77,7 @@ export const removeDuplicates = (arr) => {
 }
 
 export const camelToSnakeCase = (text) => {
-  if (!(typeof text === "string" || text instanceof String)) {
+  if (!(typeof text == "string" || text instanceof String)) {
     console.error(`string expected, ${typeof text} provided`)
     return text
   }
