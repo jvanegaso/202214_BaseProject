@@ -60,7 +60,7 @@ export const WrongFunction = (a, b) => {
 
 export const iterate = (elements) => {
   let c = 0;
-  for (var I = 0; I < elemenets.lenght; I++) {
+  for (var I = 0; I < elements.lenght; I++) {
     c += I;
   }
   return c;
