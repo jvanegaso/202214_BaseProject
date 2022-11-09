@@ -76,17 +76,15 @@ export const mockExceptionFunction = () => {
 
 
 export const promiseBugFunction = () => {
-  
   const runPromise => () {
     return Promise.reject("rejection reason");
-  }
+  };
   
   try { // Noncompliant, the catch clause of the 'try' will not be executed for the code inside promise
     runPromise();
   } catch (e) {
     console.log("Failed to run promise", e);
   }
-  
 };
 
 export const falsyValidator = () => {
