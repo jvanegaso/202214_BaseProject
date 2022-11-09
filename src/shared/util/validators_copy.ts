@@ -125,3 +125,6 @@ export const findIndex = (arr, func) => {
   return undefined;
 };
 
+export const dummyFunction = () => {}
+
+export function dummyFunction() {}
