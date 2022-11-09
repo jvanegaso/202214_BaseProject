@@ -56,7 +56,7 @@ export const dummyFunction = () => {};
 
 export const WrongFunction = (a, b) => {
   return a == b;
-}
+};
 
 export const iterate = (elements) => {
   let c = 0;
@@ -64,4 +64,12 @@ export const iterate = (elements) => {
     c += I;
   }
   return c;
-}
+};
+
+
+export const mockExceptionFunction = () => {
+  const nullArray = null
+  for (let i = 0; i < nullArray.lenght; i++) {
+    console.log('Array en ' +  i + ' es: ' + nullArray[i]);
+  }
+};
