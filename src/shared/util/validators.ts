@@ -84,7 +84,7 @@ export const camelToSnakeCase = (text) => {
   return text.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
 }
 
-export const camelToSnakeCase2 = (text) => {
+export const camelToSnakeCase = (text) => {
   if (!(typeof text == "string" || text instanceof String)) {
     console.error(`string expected, ${typeof text} provided`)
     return text
@@ -107,7 +107,7 @@ export const findIndex = (arr, func) => {
 };
 
 
-export const findIndex2 = (arr, func) => {
+export const findIndex = (arr, func) => {
   for (let index = 0; index < arr.length; index++) {
     if (func.call(this, arr[index], index)) {
       return index;
