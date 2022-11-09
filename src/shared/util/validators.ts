@@ -16,11 +16,6 @@ export const hasValidLength = (value, maxLength) => {
   return value.length <= maxLength;
 };
 
-export const startsWith = (search, rawPos) => {
-  const pos = rawPos > 0 ? rawPos|0 : 0;
-  return this.substring(pos, pos + search.length) === search;
-};
-
 export const getRandomNumberInRange = (lower = 0, upper = 10) => {
   if (isNaN(lower) || isNaN(upper)) {
     console.error("lower and upper must be valid numbers");
