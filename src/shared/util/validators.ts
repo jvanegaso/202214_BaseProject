@@ -1,3 +1,5 @@
+import { randomInt } from 'mathjs';
+
 export const validateEmail = (email) => {
   if (!email) {
     return false;
@@ -18,12 +20,9 @@ export const hasValidLength = (value, maxLength) => {
 
 export const getRandomNumberInRange = (lower = 0, upper = 10) => {
   if (isNaN(lower) || isNaN(upper)) {
-    console.error("lower and upper must be valid numbers");
     return;
   }
-  lower = Math.ceil(lower);
-  upper = Math.floor(upper);
-  return Math.floor(Math.random() * (upper - lower + 1)) + lower;
+  return randomInt(lower, upper);
 };
 
 export const removeDuplicates = (arr) => {
@@ -35,7 +34,7 @@ export const removeDuplicates = (arr) => {
 };
 
 export const camelToSnakeCase = (text) => {
-  if (!(typeof text == "string" || text instanceof String)) {
+  if (!(typeof text == 'string' || text instanceof String)) {
     console.error(`string expected, ${typeof text} provided`);
     return text;
   }
@@ -66,28 +65,29 @@ export const iterate = (elements) => {
   return c;
 };
 
-
 export const mockExceptionFunction = () => {
-  const nullArray = null
+  const nullArray = null;
   for (let i = 0; i < nullArray.lenght; i++) {
-    console.log('Array en ' +  i + ' es: ' + nullArray[i]);
+    console.log('Array en ' + i + ' es: ' + nullArray[i]);
   }
 };
 
 export const mockExceptionFunction2 = () => {
-  const nullArray = null
+  const nullArray = null;
   for (let i = 0; i < nullArray.lenght; i++) {
-    console.log('Array en ' +  i + ' es: ' + nullArray[i]);
+    console.log('Array en ' + i + ' es: ' + nullArray[i]);
   }
 };
 
 export const falsyValidator = () => {
   var a = NaN;
 
-  if (a === NaN) {  // Noncompliant; always false
-    console.log("a is not a number");  // this is dead code
+  if (a === NaN) {
+    // Noncompliant; always false
+    console.log('a is not a number'); // this is dead code
   }
-  if (a !== NaN) { // Noncompliant; always true
-    console.log("a is not NaN"); // this statement is not necessarily true
+  if (a !== NaN) {
+    // Noncompliant; always true
+    console.log('a is not NaN'); // this statement is not necessarily true
   }
 };
