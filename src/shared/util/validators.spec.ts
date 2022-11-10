@@ -1,4 +1,4 @@
-import { validateEmail, getRandomNumberInRange } from './validators';
+import {validateEmail, getRandomNumberInRange, falsyValidator} from './validators';
 
 describe('validateEmail', () => {
   it('should return null if not valid email', () => {
@@ -30,5 +30,17 @@ describe('getRandomInRange', () => {
   it('should return undefined if the maximun number is not a number', () => {
     const randomValue = getRandomNumberInRange(0, undefined);
     expect(randomValue).toBeUndefined;
+  });
+});
+
+describe('falsyValidator', () => {
+  it('should return 0 on Nan param', () => {
+    const param = falsyValidator(NaN);
+    expect(param).toBe(0);
+  });
+
+  it('should return value param', () => {
+    const param = falsyValidator(10);
+    expect(param).toBe(10);
   });
 });
