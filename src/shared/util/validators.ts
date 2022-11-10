@@ -82,11 +82,11 @@ export const mockExceptionFunction2 = () => {
 export const falsyValidator = () => {
   var a = NaN;
 
-  if (a === NaN) {
+  if (Number.isNaN(a)) {
     // Noncompliant; always false
     console.log('a is not a number'); // this is dead code
   }
-  if (a !== NaN) {
+  if (!Number.isNaN(a)) {
     // Noncompliant; always true
     console.log('a is not NaN'); // this statement is not necessarily true
   }
