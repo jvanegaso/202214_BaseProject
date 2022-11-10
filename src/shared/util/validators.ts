@@ -1,12 +1,15 @@
 import { randomInt } from 'mathjs';
+import * as isEmail from 'isemail';
 
 export const validateEmail = (email) => {
   if (!email) {
     return false;
   }
-  return String(email)
-    .toLowerCase()
-    .match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+
+  if (!isEmail.validate(email)) {
+    return null;
+  }
+  return email;
 };
 
 export const hasValidLength = (value, maxLength) => {
