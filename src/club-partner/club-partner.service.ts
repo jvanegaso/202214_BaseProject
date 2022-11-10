@@ -120,9 +120,9 @@ export class ClubPartnerService {
       );
     }
 
-    for (let i = 0; i < partners.length; i++) {
+    for (const element of partners) {
       const partner: PartnerEntity = await this.partnerRepository.findOne({
-        where: { id: partners[i].id },
+        where: { id: element.id },
       });
       if (!partner) {
         throw new BusinessLogicException(
@@ -133,7 +133,7 @@ export class ClubPartnerService {
     }
 
     club.partners = partners;
-    return await this.clubRepository.save(club);
+    return this.clubRepository.save(club);
   }
 
   async deleteMemberFromClub(clubId: string, partnerId: string) {
