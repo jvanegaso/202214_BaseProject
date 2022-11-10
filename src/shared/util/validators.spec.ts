@@ -1,4 +1,9 @@
-import {validateEmail, getRandomNumberInRange, falsyValidator} from './validators';
+import {
+  validateEmail,
+  getRandomNumberInRange,
+  falsyValidator,
+  iterate,
+} from './validators';
 
 describe('validateEmail', () => {
   it('should return null if not valid email', () => {
@@ -42,5 +47,16 @@ describe('falsyValidator', () => {
   it('should return value param', () => {
     const param = falsyValidator(10);
     expect(param).toBe(10);
+  });
+});
+
+describe('iterate', () => {
+  it('should return 5 when an array with 5 slots all with 1 is passed', () => {
+    const result = iterate([1, 1, 1, 1, 1]);
+    expect(result).toEqual(5);
+  });
+
+  it('should return false if the argument is not an array', () => {
+    expect(iterate(null)).toBeFalsy;
   });
 });

@@ -6,9 +6,7 @@ export const validateEmail = (email) => {
   }
   return String(email)
     .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    );
+    .match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 };
 
 export const hasValidLength = (value, maxLength) => {
@@ -51,18 +49,17 @@ export const findIndex = (arr, func) => {
   return undefined;
 };
 
-export const dummyFunction = () => {};
-
 export const WrongFunction = (a, b) => {
   return a == b;
 };
 
 export const iterate = (elements) => {
-  let c = 0;
-  for (var I = 0; I < elements.lenght; I++) {
-    c += I;
+  if (!Array.isArray(elements)) {
+    return false;
   }
-  return c;
+  return elements.reduce((p, c) => {
+    return (p += c);
+  }, 0);
 };
 
 export const mockExceptionFunction = () => {
@@ -72,15 +69,7 @@ export const mockExceptionFunction = () => {
   }
 };
 
-export const mockExceptionFunction2 = () => {
-  const nullArray = null;
-  for (let i = 0; i < nullArray.lenght; i++) {
-    console.log('Array en ' + i + ' es: ' + nullArray[i]);
-  }
-};
-
-export const falsyValidator = (param=NaN) => {
-
+export const falsyValidator = (param = NaN) => {
   if (Number.isNaN(param)) {
     // Noncompliant; always false
     console.log('a is not a number'); // this is dead code
