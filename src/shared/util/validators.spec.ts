@@ -16,7 +16,7 @@ describe('validateEmail', () => {
 
   it('should return an String object if a correct email is passed as argument', () => {
     const result = validateEmail('test@test.com');
-    expect(result[0]).toBe('test@test.com');
+    expect(result).toBe('test@test.com');
   });
 });
 
