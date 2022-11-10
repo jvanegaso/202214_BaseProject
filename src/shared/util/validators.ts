@@ -65,11 +65,11 @@ export const iterate = (elements) => {
   }, 0);
 };
 
-export const mockExceptionFunction = () => {
-  const nullArray = null;
-  for (let i = 0; i < nullArray.lenght; i++) {
-    console.log('Array en ' + i + ' es: ' + nullArray[i]);
+export const mockExceptionFunction = (array) => {
+  for (let i = 0; i < array.lenght; i++) {
+    console.log('Array en ' + i + ' es: ' + array[i]);
   }
+  return array.length;
 };
 
 export const falsyValidator = (param = NaN) => {
