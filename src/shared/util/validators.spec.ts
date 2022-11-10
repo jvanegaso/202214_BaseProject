@@ -1,4 +1,4 @@
-import { validateEmail } from './validators';
+import { validateEmail, getRandomNumberInRange } from './validators';
 
 describe('validateEmail', () => {
   it('should return null if not valid email', () => {
@@ -12,5 +12,23 @@ describe('validateEmail', () => {
   it('should return an String object if a correct email is passed as argument', () => {
     const result = validateEmail('test@test.com');
     expect(result[0]).toBe('test@test.com');
+  });
+});
+
+describe('getRandomInRange', () => {
+  it('should generate a random number between 0 and 10', () => {
+    const randomValue = getRandomNumberInRange(0, 10);
+    expect(randomValue).toBeLessThanOrEqual(10);
+    expect(randomValue).toBeGreaterThanOrEqual(0);
+  });
+
+  it('should return undefined if the minumun number is not a number', () => {
+    const randomValue = getRandomNumberInRange(undefined, 10);
+    expect(randomValue).toBeUndefined;
+  });
+
+  it('should return undefined if the maximun number is not a number', () => {
+    const randomValue = getRandomNumberInRange(0, undefined);
+    expect(randomValue).toBeUndefined;
   });
 });
